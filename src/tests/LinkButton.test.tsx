@@ -1,7 +1,8 @@
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 
 import LinkButton from "../components/common/LinkButton";
 
+// Setting up our mock function to test onCLick functionality
 const mockHistoryPush = jest.fn();
 
 jest.mock("react-router-dom", () => ({
@@ -11,8 +12,9 @@ jest.mock("react-router-dom", () => ({
   }),
 }));
 
+//Testing suite for LinkButton Page
 describe("LinkButton testing", () => {
-  //Testing suite for Landing Page
+  // Testing props
   let linkButtonProps = {
     content: "This is a button",
     path: "dashboard",
@@ -34,7 +36,7 @@ describe("LinkButton testing", () => {
 
   it("should use the styles passed as props", () => {
     expect(
-      wrapper.find("button").hasClass("defaultButton" + "button small")
+      wrapper.find("button").hasClass("defaultButton " + "button small")
     ).toEqual(true);
   });
 

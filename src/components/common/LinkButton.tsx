@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 
 // Proptypes for our LinkButton
@@ -11,15 +9,17 @@ type Props = {
 
 // The LinkButton will act like a react-router-dom Link component, but styled as a button
 function LinkButton({ content, path, styles }: Props) {
-  let history = useHistory();
-  function handleClick(path: string) {
+  let history = useHistory(); // Allows you to navigate in a component
+
+  // Routes to the path specified in props
+  function routeTo(path: string) {
     history.push(path);
   }
 
   return (
     <button
-      className={styles ? "defaultButton" + styles : "defaultButton"}
-      onClick={() => handleClick(path)}
+      className={styles ? "defaultButton " + styles : "defaultButton"}
+      onClick={() => routeTo(path)}
     >
       {content}
     </button>

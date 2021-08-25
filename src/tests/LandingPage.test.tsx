@@ -1,10 +1,12 @@
 import LandingPage from "../components/LandingPage";
 
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
+import LinkButton from "../components/common/LinkButton";
 
+//Testing suite for Landing Page
 describe("Landing Page testing", () => {
-  //Testing suite for Landing Page
   let wrapper: any; // Initialising wrapper
+
   beforeEach(() => {
     wrapper = shallow(<LandingPage />);
   });
@@ -21,5 +23,9 @@ describe("Landing Page testing", () => {
 
   it("should render the subHeading tagline", () => {
     expect(wrapper.exists(".landingSubheader")).toEqual(true);
+  });
+
+  it("should render the Login Button", () => {
+    expect(wrapper.find(LinkButton).length).toEqual(1);
   });
 });
