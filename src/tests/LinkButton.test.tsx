@@ -12,7 +12,7 @@ jest.mock("react-router-dom", () => ({
   }),
 }));
 
-//Testing suite for LinkButton Page
+//Testing suite for LinkButton Component
 describe("LinkButton testing", () => {
   // Testing props
   let linkButtonProps = {
