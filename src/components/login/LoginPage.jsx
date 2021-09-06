@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import "./login.css";
+import { loginUser } from "../../store/auth";
+import { useDispatch } from "react-redux";
 
 const registerFormFields = [
   {
-    refName: "registerName",
+    refName: "name",
     validation: { required: true },
     type: "text",
     name: "Name",
   },
   {
-    refName: "registerEmail",
+    refName: "email",
     validation: { required: true },
     type: "text",
     name: "Email",
   },
   {
-    refName: "registerPassword",
+    refName: "password",
     validation: {
       required: true,
       type: "password",
@@ -29,13 +31,13 @@ const registerFormFields = [
 
 const loginFormFields = [
   {
-    refName: "loginEmail",
+    refName: "email",
     validation: { required: true },
     type: "text",
     name: "Email",
   },
   {
-    refName: "loginPassword",
+    refName: "password",
     validation: {
       required: true,
       type: "password",
@@ -48,6 +50,7 @@ const loginFormFields = [
 
 // Page containing two forms that move off or on the screen when toggled
 function LoginPage() {
+  const dispatch = useDispatch();
   // Variables + method used to set classname on form
   const [registerHidden, setRegisterHidden] = useState("hideToLeft");
   const [loginHidden, setLoginHidden] = useState("");
@@ -68,7 +71,7 @@ function LoginPage() {
   };
 
   // Set these functions to whatever you want to do on form submission
-  const onLoginSubmit = (data) => console.log(data);
+  const onLoginSubmit = (data) => dispatch(loginUser(data));
   const onRegisterSubmit = (data) => console.log(data);
 
   return (

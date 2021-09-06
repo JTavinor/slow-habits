@@ -23,10 +23,10 @@ $secondaryColor: black;
   width: 12rem;
 }
 .defaultButton:hover {
-  background-color: $secondaryColor;
+  background-color: rgb(233, 218, 218);
   border: 1px solid black;
   border-radius: 3px;
-  color: $primaryColor;
+  // color: $primaryColor;
   cursor: pointer;
   height: 4rem;
   width: 12rem;
@@ -39,16 +39,26 @@ $secondaryColor: black;
 
 .landingCont {
   @include flexCenter(column);
-  background-color: $primaryColor;
+  background-color: #081229;
   height: 100vh;
+  margin: auto;
+  color: white;
+  // align-items: flex-start;
+}
+
+.landingContent {
+  display: flex;
+  flex-direction: column;
 }
 
 .landingHeader {
   font-size: 5rem;
+  margin-bottom: 0.5em;
 }
 
 .landingSubheader {
   font-size: 2.6rem;
+  margin-bottom: 1.2em;
 }
 
 // .defaultButton {

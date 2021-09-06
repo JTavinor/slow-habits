@@ -11,10 +11,9 @@
 }
 
 .defaultButton:hover {
-  background-color: black;
+  background-color: #e9dada;
   border: 1px solid black;
   border-radius: 3px;
-  color: white;
   cursor: pointer;
   height: 4rem;
   width: 12rem;
@@ -38,15 +37,29 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: white;
+  background-color: #081229;
   height: 100vh;
+  margin: auto;
+  color: white;
+}
+
+.landingContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .landingHeader {
   font-size: 5rem;
+  margin-bottom: 0.5em;
 }
 
 .landingSubheader {
   font-size: 2.6rem;
+  margin-bottom: 1.2em;
 }
 /*# sourceMappingURL=Sass.css.map */

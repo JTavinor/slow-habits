@@ -63,15 +63,18 @@ export const authSlice = createSlice({
     },
     loginSuccessful: (state, action) => {
       console.log(action);
-      state.jwt = action.payload.name; // HEADER???
+      state.jwt = action.payload.data.name; // HEADER???
       state.loading = false;
       /// CALL ACTION CREATOR FROM USER SLICE TO STORE USER DATA
     },
   },
 });
 
-export const { loginRequested, loginFailed, loginSuccessful } =
-  authSlice.actions;
+export const {
+  loginRequested,
+  loginFailed,
+  loginSuccessful,
+} = authSlice.actions;
 
 export default authSlice.reducer;
 
