@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage";
 import LinkButton from "./components/common/LinkButton";
 import { Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
+import LoginPage from "./components/login/LoginPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <LandingPage />
       </Route>
       <Route exact path="/login">
-        <Login />
+        <LoginPage />
       </Route>
     </Switch>
   );
