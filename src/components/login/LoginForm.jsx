@@ -2,14 +2,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
 
-function GenericReactHookForm({
+function Form({
   formFields,
   formSubmit,
   formHeading,
   changeFormButtonText,
   changeFormHeading,
   submitFormButtonText,
-  hidden,
+  formHidden,
+  hideFormClassName,
   swapForms,
 }) {
   const {
@@ -19,7 +20,7 @@ function GenericReactHookForm({
   } = useForm();
 
   return (
-    <div className={`formContainer ${hidden}`}>
+    <div className={`formContainer ${formHidden && hideFormClassName} `}>
       <h1>{formHeading}</h1>
       <form onSubmit={handleSubmit(formSubmit)} className="floatingLabelForm">
         <FormField
@@ -45,4 +46,4 @@ function GenericReactHookForm({
   );
 }
 
-export default GenericReactHookForm;
+export default Form;

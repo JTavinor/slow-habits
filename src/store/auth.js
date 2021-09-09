@@ -56,6 +56,7 @@ export const authSlice = createSlice({
   reducers: {
     loginRequested: (state) => {
       state.loading = true;
+      state.error = "";
     },
     loginFailed: (state, action) => {
       state.error = "Error: " + action.payload.data;

@@ -1,22 +1,27 @@
 import React from "react";
 
 function FormFields({ formFields, register, errors }) {
-  return formFields.map(({ refName, validation, type, name }) => (
+  return formFields.map(({ reference, validation, type, name }) => (
     <>
       <div className="floatingLabelGroup">
         <input
-          {...register(refName, { ...validation })}
-          id={refName}
-          className="floatingInputField"
+          {...register(reference, { ...validation })}
+          id={reference}
+          className={`floatingInputField `}
           required
           type={type}
         />
-        <label htmlFor={refName} className="floatingLabel">
+        <label
+          htmlFor={reference}
+          className={`floatingLabel ${
+            errors.length > 0 ? "formFieldError" : ""
+          }`}
+        >
           {name}
         </label>
       </div>
-      {errors[refName] && (
-        <div className="inputErrorMessage">{name} is required</div>
+      {errors[reference] && (
+        <div className="inputErrorMessage">{errors[reference].message}</div>
       )}
     </>
   ));

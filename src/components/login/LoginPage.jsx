@@ -1,73 +1,66 @@
 import React, { useState } from "react";
-import LoginForm from "./LoginForm";
+import { useDispatch, useSelector } from "react-redux";
 import "./login.css";
-import { loginUser } from "../../store/auth";
-import { useDispatch } from "react-redux";
 
-const registerFormFields = [
+import LoginForm from "./LoginForm";
+import { loginUser } from "../../store/auth";
+
+const loginFormFields = [
   {
-    refName: "name",
-    validation: { required: true },
-    type: "text",
-    name: "Name",
-  },
-  {
-    refName: "email",
-    validation: { required: true },
+    reference: "email",
+    validation: {
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "Please enter a valid email",
+      },
+      required: { value: true, message: "Email is required" },
+    },
     type: "text",
     name: "Email",
   },
   {
-    refName: "password",
+    reference: "password",
     validation: {
-      required: true,
+      required: { value: true, message: "Password is required" },
       type: "password",
-      minLength: 5,
+      minLength: {
+        value: 5,
+        message: "Password must be at least 5 characters",
+      },
     },
     type: "password",
     name: "Password",
   },
 ];
 
-const loginFormFields = [
+const registerFormFields = [
   {
-    refName: "email",
-    validation: { required: true },
-    type: "text",
-    name: "Email",
-  },
-  {
-    refName: "password",
+    reference: "name",
     validation: {
-      required: true,
-      type: "password",
-      minLength: 5,
+      required: { value: true, message: "Name is required" },
+      minLength: { value: 2, message: "Name must be at least 2 characters" },
     },
-    type: "password",
-    name: "Password",
+    type: "text",
+    name: "Name",
   },
+  ...loginFormFields,
 ];
 
 // Page containing two forms that move off or on the screen when toggled
 function LoginPage() {
   const dispatch = useDispatch();
   // Variables + method used to set classname on form
-  const [registerHidden, setRegisterHidden] = useState("hideToLeft");
-  const [loginHidden, setLoginHidden] = useState("");
+  const [registerFormHidden, setRegisterFormHidden] = useState(true);
+  const [loginFormHidden, setLoginFormHidden] = useState(false);
+
+  const { loading: apiCallPending } = useSelector((state) => state.auth);
+  console.log(apiCallPending);
 
   const swapForms = () => {
-    //
-    // WILL NEED AN EXTRA CONDITIONAL IN HERE
-    // SUBSCRIBE TO REDUX LOADING PARAMETER ON AUTH AND USER
-    // IF LOADING THEN PREVENT CHANGING FORMS
-    //
-    if (registerHidden) {
-      setRegisterHidden("");
-      setLoginHidden("hideToRight");
-    } else {
-      setRegisterHidden("hideToLeft");
-      setLoginHidden("");
-    }
+    if (apiCallPending) return;
+
+    setRegisterFormHidden(!registerFormHidden);
+    setLoginFormHidden(!loginFormHidden);
   };
 
   // Set these functions to whatever you want to do on form submission
@@ -78,25 +71,27 @@ function LoginPage() {
     <div className="overFlowControl">
       <div className="formPageContainer">
         <LoginForm
-          formSubmit={onRegisterSubmit}
+          changeFormButtonText="Go to Login"
+          changeFormHeading="Already have an account?"
           formFields={registerFormFields}
           formHeading="Create Account"
+          formHidden={registerFormHidden}
+          formSubmit={onRegisterSubmit}
           submitFormButtonText="Register"
-          changeFormHeading="Already have an account?"
-          changeFormButtonText="Go to Login"
+          hideFormClassName="hideToLeft"
           swapForms={swapForms}
-          hidden={registerHidden}
         />
         <LoginForm
-          formSubmit={onLoginSubmit}
-          formFields={loginFormFields}
-          hiddenClass={{ className: "loginHidden", initialHidden: false }}
-          formHeading="Sign in to Slow Habits"
-          submitFormButtonText="Login"
-          changeFormHeading="Don't have an account?"
           changeFormButtonText="Register"
+          changeFormHeading="Don't have an account?"
+          formFields={loginFormFields}
+          formHeading="Sign in to Slow Habits"
+          formHidden={loginFormHidden}
+          formSubmit={onLoginSubmit}
+          hiddenClass={{ className: "loginHidden", initialHidden: false }}
+          submitFormButtonText="Login"
+          hideFormClassName="hideToRight"
           swapForms={swapForms}
-          hidden={loginHidden}
         />
       </div>
     </div>
